@@ -1,0 +1,27 @@
+{
+  "name": "TerraBot",
+  "prefix": "!",
+  "statusMessage": "🤖 TerraBot Active | Use !help for commands",
+  "sessionPath": "./sessions",
+  "logLevel": "info",
+  
+  "maxReconnects": 5,
+  "reconnectInterval": 3000,
+  "connectionTimeout": 60000,
+  "qrTimeout": 60000,
+  
+  "enableMessageLogging": true,
+  "enableReadReceipts": true,
+  "enableTypingIndicator": true,
+  "typingTimeout": 2000,
+  
+  "privateMode": false,
+  "owners": [
+    "628xxxxxxx",
+    "628xxxxxxx"
+  ],
+  "leveling": {
+    "enabled": true,
+    "levelUpMessages": false
+  }
+}
