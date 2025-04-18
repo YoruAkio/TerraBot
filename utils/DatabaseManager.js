@@ -24,6 +24,29 @@ class Database extends EventEmitter {
     this.hasChanges = false;
     this.autoSaveTimer = null;
     this.isLoaded = false;
+
+    // Graceful shutdown: save data on process exit/signals
+    const saveOnExit = async () => {
+      try {
+        if (this.hasChanges) {
+          await this.save();
+        }
+      } catch (err) {
+        this.logger.error(`Error saving database on exit: ${err}`);
+      }
+    };
+
+    process.on('SIGINT', async () => {
+      await saveOnExit();
+      process.exit(0);
+    });
+    process.on('SIGTERM', async () => {
+      await saveOnExit();
+      process.exit(0);
+    });
+    process.on('exit', async () => {
+      await saveOnExit();
+    });
   }
 
   /**

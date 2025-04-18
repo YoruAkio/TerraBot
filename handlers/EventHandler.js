@@ -82,7 +82,7 @@ class EventHandler extends EventEmitter {
         await event.execute(this.terra, ...args);
       } else {
         // Add better debugging for missing events
-        this.logger.debug(`No handler found for event: ${eventName}`);
+        this.logger.debug(`Unhandled Event: ${eventName}`);
       }
 
       // Also emit the event for any listeners
