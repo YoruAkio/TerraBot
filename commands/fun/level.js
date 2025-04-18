@@ -1,5 +1,3 @@
-import { category } from "./profile";
-
 module.exports = {
   name: "level",
   description: "Display your level and XP progress",
@@ -81,7 +79,7 @@ module.exports = {
         { quoted: msg }
       );
     } catch (error) {
-      terra.logger.error("Error in level command:", error);
+      terra.logger.error(`Error in level command: ${error.message}`);
       return terra.reply(msg, `❌ Error checking level: ${error.message}`);
     }
   },

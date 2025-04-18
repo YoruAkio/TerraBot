@@ -51,7 +51,7 @@ class CommandHandler {
       );
       return uniqueCommands.size;
     } catch (error) {
-      this.logger.error("Error loading commands:", error);
+      this.logger.error("Error loading commands:", error.message);
       return 0;
     }
   }
@@ -91,7 +91,7 @@ class CommandHandler {
         }
       }
     } catch (error) {
-      this.logger.error(`Error loading commands from directory ${dir}:`, error);
+      this.logger.error(`Error loading commands from directory ${dir}:`, error.message);
     }
   }
 
@@ -165,7 +165,8 @@ class CommandHandler {
         `Loaded command: ${command.name} (${command.category})`
       );
     } catch (error) {
-      this.logger.error(`Error loading command file ${filePath}:`, error);
+      this.logger.error(`Error loading command file ${filePath}: ${error.message}`);
+      console.log(`Error loading command file ${filePath}:`, error.message);
     }
   }
 
