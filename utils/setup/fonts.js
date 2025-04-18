@@ -18,7 +18,7 @@ async function downloadFont() {
     
     return true;
   } catch (error) {
-    console.error('Error downloading font:', error.message);
+    console.error('Error downloading font:' + error.message);
     return false;
   }
 }

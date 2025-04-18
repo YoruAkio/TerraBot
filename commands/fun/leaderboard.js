@@ -63,7 +63,7 @@ module.exports = {
       );
       
     } catch (error) {
-      terra.logger.error('Error in leaderboard command:', error);
+      terra.logger.error(`Error in leaderboard command: ${error.message}`);
       return terra.reply(msg, `❌ Error showing leaderboard: ${error.message}`);
     }
   }

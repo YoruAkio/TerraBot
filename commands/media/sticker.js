@@ -132,7 +132,7 @@ module.exports = {
             
             terra.logger.info(`Downloaded profile picture for ${targetJid}`);
           } catch (ppError) {
-            terra.logger.error("Error getting profile picture:", ppError);
+            terra.logger.error(`Error fetching profile picture: ${ppError.message}`);
             return terra.reply(msg, "Could not get profile picture. User may not have a profile picture or it's private.");
           }
         } else if (isImage || isViewOnceImage) {
@@ -196,7 +196,7 @@ module.exports = {
           isVideoMedia = true;
         }
       } catch (downloadError) {
-        terra.logger.error("Error downloading media:", downloadError);
+        terra.logger.error(`Error downloading media: ${downloadError.message}`);
         return terra.reply(msg, `Error downloading media: ${downloadError.message}`);
       }
 
@@ -353,10 +353,10 @@ module.exports = {
           await fs.unlink(outputPathGif);
         }
       } catch (cleanupError) {
-        terra.logger.error("Error cleaning up temp files:", cleanupError);
+        terra.logger.error(`Error cleaning up temp files: ${cleanupError.message}`);
       }
     } catch (error) {
-      terra.logger.error("Error processing media:", error);
+      terra.logger.error(`Error creating sticker: ${error.message}`);
       return terra.reply(msg, `Error creating sticker: ${error.message}. This might be because the video is too large or in an unsupported format.`);
     }
   }

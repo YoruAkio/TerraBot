@@ -45,7 +45,7 @@ class ReactionHandler {
                 });
             }
         } catch (error) {
-            this.logger.error('Error handling reactions:', error);
+            this.logger.error('Error handling reactions:' + error);
         }
     }
     

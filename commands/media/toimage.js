@@ -68,7 +68,7 @@ module.exports = {
           }
         );
       } catch (downloadError) {
-        terra.logger.error("Error downloading sticker:", downloadError);
+        terra.logger.error(`Error downloading sticker: ${downloadError.message}`);
         return terra.reply(msg, `Error downloading sticker: ${downloadError.message}`);
       }
 
@@ -138,7 +138,7 @@ module.exports = {
               { quoted: msg }
             );
           } catch (imageError) {
-            terra.logger.error("Error converting to PNG:", imageError);
+            terra.logger.error(`Error converting to PNG: ${imageError.message}`);
             return terra.reply(msg, `Error converting sticker to image: ${imageError.message}`);
           }
         }
@@ -147,11 +147,11 @@ module.exports = {
         try {
           await fs.remove(workDir);
         } catch (cleanupError) {
-          terra.logger.error("Error cleaning up temp files:", cleanupError);
+          terra.logger.error(`Error cleaning up temp files: ${cleanupError.message}`);
         }
       }
     } catch (error) {
-      terra.logger.error("Error in toimage command:", error);
+      terra.logger.error(`Error in toimage command: ${error.message}`);
       return terra.reply(msg, `Error converting sticker: ${error.message}`);
     }
   }

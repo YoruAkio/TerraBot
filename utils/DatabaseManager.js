@@ -43,7 +43,7 @@ class Database extends EventEmitter {
       this.logger.info(`Database ${this.name} initialized with ${this.data.size} records`);
       return true;
     } catch (error) {
-      this.logger.error(`Error initializing database ${this.name}:`, error);
+      this.logger.error(`Error initializing database ${this.name}: ${error}`);
       return false;
     }
   }
@@ -100,7 +100,7 @@ class Database extends EventEmitter {
       }
       return true;
     } catch (error) {
-      this.logger.error(`Error loading database ${this.name}:`, error);
+      this.logger.error(`Error loading database ${this.name}: ` + error);
       return false;
     }
   }
@@ -118,7 +118,7 @@ class Database extends EventEmitter {
       this.logger.debug(`Saved ${this.data.size} records to ${this.name}`);
       return true;
     } catch (error) {
-      this.logger.error(`Error saving database ${this.name}:`, error);
+      this.logger.error(`Error saving database ${this.name}: ${error}`);
       return false;
     }
   }

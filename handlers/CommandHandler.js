@@ -51,7 +51,7 @@ class CommandHandler {
       );
       return uniqueCommands.size;
     } catch (error) {
-      this.logger.error("Error loading commands:", error.message);
+      this.logger.error(`Error loading commands: ${error.message}`);
       return 0;
     }
   }
@@ -91,7 +91,7 @@ class CommandHandler {
         }
       }
     } catch (error) {
-      this.logger.error(`Error loading commands from directory ${dir}:`, error.message);
+      this.logger.error(`Error loading commands from directory ${dir}: ${error.message}`);
     }
   }
 
@@ -166,7 +166,6 @@ class CommandHandler {
       );
     } catch (error) {
       this.logger.error(`Error loading command file ${filePath}: ${error.message}`);
-      console.log(`Error loading command file ${filePath}:`, error.message);
     }
   }
 
@@ -202,7 +201,7 @@ class CommandHandler {
           msg.key.remoteJid
         );
       } catch (error) {
-        this.logger.error("Error getting group metadata:", error);
+        this.logger.error(`Error fetching group metadata: ${error.message}`);
       }
     }
 
@@ -287,14 +286,14 @@ class CommandHandler {
           await command.execute(this.terra, msg, args, context);
         }
       } catch (execError) {
-        this.logger.error("Error executing command:", execError);
+        this.logger.error(`Error executing command ${command.name}: ${execError.message}`);
         await this.terra.reply(
           msg,
           `❌ Error executing command: ${execError.message}`
         );
       }
     } catch (error) {
-      this.logger.error("Error handling command:", error);
+      this.logger.error(`Error handling message: ${error.message}`);
       // Only reply if we can extract a meaningful error message
       if (error.message) {
         await this.terra.reply(

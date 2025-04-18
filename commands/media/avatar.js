@@ -39,7 +39,7 @@ module.exports = {
         }
       } catch (presenceError) {
         // Don't let typing indicator errors stop the command
-        terra.logger.debug('Error sending typing indicator:', presenceError.message);
+        terra.logger.debug(`Error sending typing indicator: ${presenceError.message}`);
       }
       
       // Try to get profile picture URL
@@ -68,7 +68,7 @@ module.exports = {
         return await terra.messageUtils.sendImage(msg.key.remoteJid, defaultAvatar, caption, { quoted: msg });
       }
     } catch (error) {
-      terra.logger.error('Error in avatar command:', error);
+      terra.logger.error(`Error in avatar command: ${error.message}`);
       return terra.reply(msg, `❌ Error getting profile picture: ${error.message}`);
     }
   }

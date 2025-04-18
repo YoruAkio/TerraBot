@@ -71,7 +71,7 @@ module.exports = {
         return terra.reply(msg, `❌ Unknown setting: ${setting}\n\nAvailable settings:\n- privatemode\n- leveling\n- levelupmessages`);
       }
     } catch (error) {
-      terra.logger.error('Error saving configuration:', error);
+      terra.logger.error(`Error saving configuration: ${error.message}`);
       return terra.reply(msg, `⚠️ Setting was changed but there was an error saving the configuration: ${error.message}`);
     }
   }

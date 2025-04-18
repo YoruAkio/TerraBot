@@ -31,7 +31,7 @@ class GroupManager {
             
             return result;
         } catch (error) {
-            this.logger.error(`Failed to create group ${name}:`, error);
+            this.logger.error(`Failed to create group ${name}: ${error}`);
             return null;
         }
     }
@@ -57,7 +57,7 @@ class GroupManager {
             
             return null;
         } catch (error) {
-            this.logger.error(`Failed to fetch group metadata for ${groupJid}:`, error);
+            this.logger.error(`Failed to fetch group metadata for ${groupJid}: ${error}`);
             return null;
         }
     }
@@ -77,7 +77,7 @@ class GroupManager {
             
             return await this.fetchGroupMetadata(groupJid);
         } catch (error) {
-            this.logger.error(`Error getting group metadata for ${groupJid}:`, error);
+            this.logger.error(`Error getting group metadata for ${groupJid}: ${error}`);
             return null;
         }
     }
@@ -108,7 +108,7 @@ class GroupManager {
             
             return result;
         } catch (error) {
-            this.logger.error(`Failed to add participants to group ${groupJid}:`, error);
+            this.logger.error(`Failed to add participants to group ${groupJid}: ${error}`);
             return null;
         }
     }
@@ -139,7 +139,7 @@ class GroupManager {
             
             return result;
         } catch (error) {
-            this.logger.error(`Failed to remove participants from group ${groupJid}:`, error);
+            this.logger.error(`Failed to remove participants from group ${groupJid}: ${error}`);
             return null;
         }
     }
@@ -170,7 +170,7 @@ class GroupManager {
             
             return result;
         } catch (error) {
-            this.logger.error(`Failed to promote participants in group ${groupJid}:`, error);
+            this.logger.error(`Failed to promote participants in group ${groupJid}: ${error}`);
             return null;
         }
     }
@@ -201,7 +201,7 @@ class GroupManager {
             
             return result;
         } catch (error) {
-            this.logger.error(`Failed to demote participants in group ${groupJid}:`, error);
+            this.logger.error(`Failed to demote participants in group ${groupJid}: ${error}`);
             return null;
         }
     }
@@ -227,7 +227,7 @@ class GroupManager {
             
             return true;
         } catch (error) {
-            this.logger.error(`Failed to update group subject for ${groupJid}:`, error);
+            this.logger.error(`Failed to update group subject for ${groupJid}: ${error}`);
             return false;
         }
     }
@@ -253,7 +253,7 @@ class GroupManager {
             
             return true;
         } catch (error) {
-            this.logger.error(`Failed to update group description for ${groupJid}:`, error);
+            this.logger.error(`Failed to update group description for ${groupJid}: ${error}`);
             return false;
         }
     }
@@ -280,7 +280,7 @@ class GroupManager {
             
             return true;
         } catch (error) {
-            this.logger.error(`Failed to update group setting for ${groupJid}:`, error);
+            this.logger.error(`Failed to update group setting for ${groupJid}: ${error}`);
             return false;
         }
     }
@@ -305,7 +305,7 @@ class GroupManager {
             
             return true;
         } catch (error) {
-            this.logger.error(`Failed to leave group ${groupJid}:`, error);
+            this.logger.error(`Failed to leave group ${groupJid}: ${error}`);
             return false;
         }
     }
@@ -329,7 +329,7 @@ class GroupManager {
             
             return groupIds.map(id => chats[id]);
         } catch (error) {
-            this.logger.error('Failed to fetch all groups:', error);
+            this.logger.error('Failed to fetch all groups:' + error);
             return [];
         }
     }
@@ -354,7 +354,7 @@ class GroupManager {
                 p => p.id === botJid && (p.admin === 'admin' || p.admin === 'superadmin')
             );
         } catch (error) {
-            this.logger.error(`Failed to check admin status for ${groupJid}:`, error);
+            this.logger.error(`Failed to check admin status for ${groupJid}: ${error}`);
             return false;
         }
     }
@@ -377,7 +377,7 @@ class GroupManager {
                 p => p.id === userJid && (p.admin === 'admin' || p.admin === 'superadmin')
             );
         } catch (error) {
-            this.logger.error(`Failed to check admin status for user ${userJid} in group ${groupJid}:`, error);
+            this.logger.error(`Failed to check admin status for user ${userJid} in group ${groupJid}: ${error}`);
             return false;
         }
     }

@@ -131,15 +131,34 @@ class Terra {
       const day = String(now.getDate()).padStart(2, "0");
       const month = String(now.getMonth() + 1).padStart(2, "0");
       const timestamp = `${hours}:${minutes} ${day}-${month}`;
-
+    
       // Format log level - right aligned in fixed width (7 chars)
       const levelText = level.toUpperCase().padStart(7);
-
-      // Format message content
-      let formattedMessage;
-      if (typeof message === "object") {
+    
+      // Format message content - handle both direct error objects and error as second parameter
+      let formattedMessage = "";
+      
+      // Check if first argument is a string and we have additional arguments
+      if (typeof message === "string" && arguments.length > 5) {
+        // We have additional arguments after the standard ones
+        formattedMessage = message;
+        
+        // Process additional arguments (typically errors)
+        for (let i = 5; i < arguments.length; i++) {
+          const arg = arguments[i];
+          if (arg instanceof Error) {
+            formattedMessage += `${arg.message}\n${arg.stack || ''}`;
+          } else if (typeof arg === "object") {
+            formattedMessage += JSON.stringify(arg, null, 2);
+          } else {
+            formattedMessage += String(arg);
+          }
+        }
+      } 
+      // Handle single argument cases (original behavior)
+      else if (typeof message === "object") {
         if (message instanceof Error) {
-          formattedMessage = `${message.message}\n${message.stack}`;
+          formattedMessage = `${message.message}\n${message.stack || ''}`;
         } else {
           // Extract useful properties and format as key-value pairs
           const { name, ...details } = message;
@@ -155,7 +174,7 @@ class Terra {
       } else {
         formattedMessage = message;
       }
-
+    
       // Create a consistent module display with better alignment
       let moduleText;
       if (moduleName) {
@@ -168,7 +187,7 @@ class Terra {
       } else {
         moduleText = " ".repeat(17); // +2 for brackets
       }
-
+    
       // Output the formatted log message with consistent alignment
       console.log(
         `${color}${timestamp} ${levelText}\x1b[0m | ${moduleText}${formattedMessage}`
@@ -283,7 +302,7 @@ class Terra {
       this.logger.info("TerraBot started successfully");
       return true;
     } catch (error) {
-      this.logger.error("Failed to start TerraBot:", error);
+      this.logger.error("Failed to start TerraBot:" + error);
       throw error;
     }
   }
@@ -473,7 +492,7 @@ class Terra {
               userInfo || { id: null, name: "Unknown" }
             );
           } catch (error) {
-            this.logger.error("Error during post-connection setup:", error);
+            this.logger.error("Error during post-connection setup:" + error);
           }
         }
       });
@@ -484,7 +503,7 @@ class Terra {
           await this.authState.saveCreds();
           this.logger.debug("Credentials updated and saved");
         } catch (error) {
-          this.logger.error("Error saving credentials:", error);
+          this.logger.error("Error saving credentials:" + error);
         }
       });
 
@@ -528,7 +547,7 @@ class Terra {
             }
           }
         } catch (error) {
-          this.logger.error("Error processing message batch:", error);
+          this.logger.error("Error processing message batch:" + error);
         }
       });
 
@@ -537,7 +556,7 @@ class Terra {
         try {
           await this.reactionHandler.handleReactions(reactions);
         } catch (error) {
-          this.logger.error("Error handling reactions:", error);
+          this.logger.error("Error handling reactions:" + error);
         }
       });
 
@@ -549,7 +568,7 @@ class Terra {
             update
           );
         } catch (error) {
-          this.logger.error("Error handling group participants update:", error);
+          this.logger.error("Error handling group participants update:" + error);
         }
       });
 
@@ -558,7 +577,7 @@ class Terra {
         try {
           await this.eventHandler.handleEvent("groups.update", updates);
         } catch (error) {
-          this.logger.error("Error handling group update:", error);
+          this.logger.error("Error handling group update:" + error);
         }
       });
 
@@ -567,16 +586,16 @@ class Terra {
         try {
           await this.eventHandler.handleEvent("message.receipt", updates);
         } catch (error) {
-          this.logger.error("Error handling message receipt update:", error);
+          this.logger.error("Error handling message receipt update:" + error);
         }
       });
 
       this.isReconnecting = false;
       return this.socket;
     } catch (error) {
-      this.logger.error("Connection failed:", error);
+      this.logger.error("Connection failed:" + error);
       this.isReconnecting = false;
-      this.eventHandler.emit("connection.failed", error);
+      this.eventHandler.emit("connection.failed" + error);
 
       // Attempt to reconnect
       if (this.reconnectCount < this.config.maxReconnects) {
@@ -656,7 +675,7 @@ class Terra {
       // Fallback
       return { id: "unknown@s.whatsapp.net", name: "Unknown" };
     } catch (error) {
-      this.logger.error("Error getting user info:", error);
+      this.logger.error("Error getting user info:" + error);
       return { id: null, name: "Unknown" };
     }
   }
@@ -699,7 +718,7 @@ class Terra {
       this.logger.info("TerraBot stopped successfully");
       return true;
     } catch (error) {
-      this.logger.error("Error stopping TerraBot:", error);
+      this.logger.error("Error stopping TerraBot:" + error);
       return false;
     }
   }
@@ -758,7 +777,7 @@ class Terra {
 
       return result;
     } catch (error) {
-      this.logger.error(`Error sending message to ${jid}:`, error);
+      this.logger.error(`Error sending message to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -997,7 +1016,7 @@ class Terra {
       this.logger.info("Configuration saved successfully");
       return true;
     } catch (error) {
-      this.logger.error("Failed to save configuration:", error);
+      this.logger.error("Failed to save configuration:" + error);
       return false;
     }
   }
@@ -1052,7 +1071,7 @@ class Terra {
           participant.id === userId && participant.admin !== undefined
       );
     } catch (error) {
-      this.logger.error("Error checking admin status:", error);
+      this.logger.error("Error checking admin status:" + error);
       return false;
     }
   }

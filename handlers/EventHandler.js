@@ -54,14 +54,14 @@ class EventHandler extends EventEmitter {
 
           this.logger.debug(`Loaded event: ${event.name}`);
         } catch (error) {
-          this.logger.error(`Error loading event file ${file}:`, error);
+          this.logger.error(`Error loading event ${file}: ${error.message}`);
         }
       }
 
       this.logger.info(`Loaded ${this.events.size} events`);
       return this.events.size;
     } catch (error) {
-      this.logger.error("Error loading events:", error);
+      this.logger.error(`Error loading events: ${error.message}`);
       return 0;
     }
   }
@@ -88,7 +88,7 @@ class EventHandler extends EventEmitter {
       // Also emit the event for any listeners
       this.emit(eventName, ...args);
     } catch (error) {
-      this.logger.error(`Error handling event ${eventName}:`, error);
+      this.logger.error(`Error executing event ${eventName}: ${error.message}`);
     }
   }
 }

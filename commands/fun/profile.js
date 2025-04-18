@@ -61,7 +61,7 @@ module.exports = {
       // Send profile message
       await terra.reply(msg, profileMsg);
     } catch (error) {
-      terra.logger.error('Error retrieving profile:', error);
+      terra.logger.error(`Error in profile command: ${error.message}`);
       return terra.reply(msg, 'Error retrieving profile data. Please try again later.');
     }
   }
@@ -87,7 +87,7 @@ async function getUserData(userId) {
     // Return user data if found, null otherwise
     return data[userId] || null;
   } catch (error) {
-    console.error('Error reading user data:', error);
+    terra.logger.error(`Error reading user data: ${error.message}`);
     return null;
   }
 }

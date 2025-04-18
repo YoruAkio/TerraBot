@@ -65,7 +65,7 @@ class CanvasManager {
         this.fontFamily = "Arial, sans-serif";
       }
     } catch (error) {
-      console.error("Error initializing fonts:", error);
+      console.error("Error initializing fonts:" + error);
       this.fontFamily = "Arial, sans-serif";
     }
   }
@@ -221,7 +221,7 @@ async createProfileCard(userData, options = {}) {
     ctx.stroke();
     ctx.restore();
   } catch (error) {
-    console.error("Error loading profile image:", error);
+    console.error("Error loading profile image:" + error);
   }
 
   // Draw username with purple glow

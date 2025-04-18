@@ -36,7 +36,7 @@ class SessionManager {
       
       return this.authState;
     } catch (error) {
-      this.logger.error('Error initializing session:', error);
+      this.logger.error('Error initializing session:' + error);
       throw error;
     }
   }
@@ -52,7 +52,7 @@ class SessionManager {
       const credsPath = path.join(this.sessionPath, 'creds.json');
       return await fs.pathExists(credsPath);
     } catch (error) {
-      this.logger.error('Error checking session existence:', error);
+      this.logger.error('Error checking session existence:' + error);
       return false;
     }
   }
@@ -71,7 +71,7 @@ class SessionManager {
       
       return false;
     } catch (error) {
-      this.logger.error('Error saving credentials:', error);
+      this.logger.error('Error saving credentials:' + error);
       return false;
     }
   }
@@ -85,7 +85,7 @@ class SessionManager {
       this.logger.info('Session cleared');
       return true;
     } catch (error) {
-      this.logger.error('Error clearing session:', error);
+      this.logger.error('Error clearing session:' + error);
       return false;
     }
   }
@@ -109,7 +109,7 @@ class SessionManager {
       this.logger.info(`Session backed up to ${backupPath}`);
       return backupPath;
     } catch (error) {
-      this.logger.error('Error backing up session:', error);
+      this.logger.error('Error backing up session:' + error);
       return null;
     }
   }
@@ -137,7 +137,7 @@ class SessionManager {
       this.logger.info(`Session restored from ${backupPath}`);
       return true;
     } catch (error) {
-      this.logger.error('Error restoring session:', error);
+      this.logger.error('Error restoring session:' + error);
       return false;
     }
   }

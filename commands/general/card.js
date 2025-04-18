@@ -47,7 +47,8 @@ module.exports = {
       try {
         profilePic = await canvasManager.getProfilePicture(terra.socket, targetUser);
       } catch (ppError) {
-        console.log("Couldn't get profile picture:", ppError.message);
+        terra.logger.error(`Error fetching profile picture: ${ppError.message}`);
+        profilePic = null; // Fallback to default if error occurs
       }
       
       // Generate the profile card
@@ -66,7 +67,7 @@ module.exports = {
       );
       
     } catch (error) {
-      terra.logger.error('Error generating profile card:', error);
+      terra.logger.error(`Error in card command: ${error.message}`);
       return terra.reply(msg, 'Error generating profile card. Please try again later.');
     }
   }
@@ -92,7 +93,7 @@ async function getUserData(userId) {
     // Return user data if found, null otherwise
     return data[userId] || null;
   } catch (error) {
-    console.error('Error reading user data:', error);
+    terra.logger.error(`Error reading user data: ${error.message}`);
     return null;
   }
 }

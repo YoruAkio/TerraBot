@@ -54,7 +54,7 @@ class QueueManager {
       this.lastMessageTime = Date.now();
       resolve(result);
     } catch (error) {
-      this.logger.error('Error processing queued task:', error);
+      this.logger.error('Error processing queued task:' + error);
       reject(error);
     }
 

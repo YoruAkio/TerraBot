@@ -95,7 +95,7 @@ module.exports = {
         try {
           await terra.commandHandler.handleMessage(msg);
         } catch (error) {
-          terra.logger.error('Error executing command:', error);
+          terra.logger.error(`Error executing command: ${error.message}`);
           await terra.reply(msg, `❌ Error executing command: ${error.message}`);
         }
       }

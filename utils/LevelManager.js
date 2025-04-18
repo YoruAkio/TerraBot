@@ -46,7 +46,7 @@ class LevelManager {
       await this.db.initialize();
       return true;
     } catch (error) {
-      this.logger.error('Error initializing LevelManager:', error);
+      this.logger.error('Error initializing LevelManager:' + error);
       return false;
     }
   }

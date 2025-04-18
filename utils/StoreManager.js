@@ -41,7 +41,7 @@ class StoreManager {
             
             return true;
         } catch (error) {
-            this.logger.error('Error initializing message store:', error);
+            this.logger.error('Error initializing message store:' + error);
             // Don't throw error, just start with empty store
             this.messageStore = new Map();
             return false;
@@ -70,7 +70,7 @@ class StoreManager {
             
             return true;
         } catch (error) {
-            this.logger.error('Error saving message store:', error);
+            this.logger.error('Error saving message store:' + error);
             return false;
         }
     }
@@ -99,7 +99,7 @@ class StoreManager {
             
             return true;
         } catch (error) {
-            this.logger.error('Error saving message:', error);
+            this.logger.error('Error saving message:' + error);
             return false;
         }
     }
@@ -114,7 +114,7 @@ class StoreManager {
             const storeKey = `${key.remoteJid}_${key.id}`;
             return this.messageStore.get(storeKey) || null;
         } catch (error) {
-            this.logger.error('Error getting message:', error);
+            this.logger.error('Error getting message:' + error);
             return null;
         }
     }
@@ -130,7 +130,7 @@ class StoreManager {
             this.logger.info('Session data cleared');
             return true;
         } catch (error) {
-            this.logger.error('Error clearing session:', error);
+            this.logger.error('Error clearing session:' + error);
             return false;
         }
     }

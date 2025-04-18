@@ -29,7 +29,7 @@ class ContactManager {
       this.initComplete = true;
       return true;
     } catch (error) {
-      this.logger.error('Error initializing ContactManager:', error);
+      this.logger.error('Error initializing ContactManager:' + error);
       this.initComplete = true; // Set to true anyway so we don't keep trying to initialize
       return false;
     }
@@ -96,7 +96,7 @@ class ContactManager {
       this._trackFailedAttempt(jid);
       
       // Log with proper error details
-      this.logger.error(`Error fetching contact ${jid}:`, error.message || 'Unknown error');
+      this.logger.error(`Error fetching contact ${jid}: ${error}`.message || 'Unknown error');
       return null;
     }
   }

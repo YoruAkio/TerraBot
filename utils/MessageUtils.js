@@ -24,7 +24,7 @@ class MessageUtils {
       const response = await axios.get(url, { responseType: 'arraybuffer' });
       return Buffer.from(response.data);
     } catch (error) {
-      this.logger.error(`Error downloading from URL ${url}:`, error);
+      this.logger.error(`Error downloading from URL ${url}: ${error}`);
       throw error;
     }
   }
@@ -55,7 +55,7 @@ class MessageUtils {
       
       throw new Error('Invalid media source');
     } catch (error) {
-      this.logger.error('Error getting media buffer:', error);
+      this.logger.error('Error getting media buffer:' + error);
       throw error;
     }
   }
@@ -80,7 +80,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending image to ${jid}:`, error);
+      this.logger.error(`Error sending image to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -105,7 +105,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending video to ${jid}:`, error);
+      this.logger.error(`Error sending video to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -140,7 +140,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending audio to ${jid}:`, error);
+      this.logger.error(`Error sending audio to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -177,7 +177,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending document to ${jid}:`, error);
+      this.logger.error(`Error sending document to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -200,7 +200,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending sticker to ${jid}:`, error);
+      this.logger.error(`Error sending sticker to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -232,7 +232,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending location to ${jid}:`, error);
+      this.logger.error(`Error sending location to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -284,7 +284,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending contact to ${jid}:`, error);
+      this.logger.error(`Error sending contact to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -320,7 +320,7 @@ class MessageUtils {
       
       return await this.terra.sendMessage(jid, message);
     } catch (error) {
-      this.logger.error(`Error sending button message to ${jid}:`, error);
+      this.logger.error(`Error sending button message to ${jid}: ${error}`);
       throw error;
     }
   }
@@ -340,7 +340,7 @@ class MessageUtils {
         }
       });
     } catch (error) {
-      this.logger.error(`Error reacting to message:`, error);
+      this.logger.error(`Error reacting to message: ${error}`);
       throw error;
     }
   }
@@ -366,7 +366,7 @@ class MessageUtils {
       
       return buffer;
     } catch (error) {
-      this.logger.error('Error downloading media:', error);
+      this.logger.error('Error downloading media:' + error);
       throw error;
     }
   }
