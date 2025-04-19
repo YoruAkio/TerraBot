@@ -42,7 +42,7 @@ if (!fs.existsSync(configPath)) {
     config = require(configPath);
     console.log('📄 Loaded config.json');
   } catch (error) {
-    console.error('❌ Error loading config.json:', error);
+    console.error('❌ Error loading config.json: ' + error);
     process.exit(1);
   }
 }
@@ -65,14 +65,14 @@ const bot = new Terra(config);
   try {
     await bot.start();
   } catch (error) {
-    console.error('❌ Failed to start TerraBot:', error);
+    console.error('❌ Failed to start TerraBot: ' + error);
     process.exit(1);
   }
 })();
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught exception:', error);
+  console.error('❌ Uncaught exception: ' + error);
   // Log but don't exit to keep bot running
 });
 

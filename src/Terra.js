@@ -26,6 +26,7 @@ const ContactManager = require("../utils/ContactManager");
 const GroupManager = require("../utils/GroupManager");
 const QueueManager = require("../utils/QueueManager");
 const LevelManager = require("../utils/LevelManager");
+const AdventureManager = require("../utils/AdventureManager");
 
 class Terra {
   constructor(config) {
@@ -216,9 +217,11 @@ class Terra {
     this.reconnectCount = 0;
     this.qrCodeUrl = null;
     this.startupTime = Date.now();
+    this.prefix = this.config.prefix;
     this.messageCount = { sent: 0, received: 0 };
     this.isReconnecting = false;
     this.authState = null;
+    this.adventureManager = null;
 
     // Handle graceful shutdown
     this._setupShutdownHandlers();
@@ -232,6 +235,7 @@ class Terra {
     this.groupManager = new GroupManager(this);
     this.queueManager = new QueueManager(this);
     this.levelManager = new LevelManager(this);
+    this.adventureManager = new AdventureManager(this);
 
     // Initialize handlers
     this.commandHandler = new CommandHandler(this);
@@ -283,6 +287,9 @@ class Terra {
 
       // Initialize level manager
       await this.levelManager.initialize();
+
+      // Initialize adventure manager
+      await this.adventureManager.initialize();
 
       // Connect to WhatsApp
       this.logger.info("Connecting to WhatsApp...");
