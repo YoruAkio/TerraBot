@@ -98,6 +98,34 @@ TerraBot uses a config.json file for all settings. Here's an example with explan
   - `privateMode`: When true, only owners can use the bot
   - `owners`: List of phone numbers (with country code) of bot owners
 
+## 🐳 Docker Support
+
+TerraBot can also be run easily using Docker. This is the recommended way if you want a consistent environment without installing Node.js, Bun, or system dependencies manually.
+
+### Build the Docker image
+
+```bash
+docker build -t terrabot .
+```
+
+### Run the bot in a container
+
+```bash
+docker run -it --rm terrabot
+```
+
+If you want to persist data (like `data/` or `sessions/`), mount those directories as volumes:
+
+```bash
+docker run -it --rm \
+  -v $(pwd)/data:/app/data \
+  -v $(pwd)/sessions:/app/sessions \
+  terrabot
+```
+
+> **Note:** The provided Dockerfile uses a Debian-based Node.js image and installs all dependencies required for native modules like `canvas`.  
+> Make sure to configure your `config.json` and place it in the project root before building the image.
+
 ## 🏃‍♂️ Running the Bot
 
 Start the bot with:
