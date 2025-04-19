@@ -257,14 +257,14 @@ class Terra {
   _setupShutdownHandlers() {
     // Capture SIGINT and SIGTERM for graceful shutdown
     process.once("SIGINT", async () => {
-      console.log("Shutting down TerraBot...");
+      this.logger.info("Shutting down TerraBot...");
       await this.levelManager.saveData();
       await this.stop(false); // Don't log out, just disconnect
       process.exit(0);
     });
 
     process.once("SIGTERM", async () => {
-      console.log("Shutting down TerraBot...");
+      this.logger.info("Shutting down TerraBot...");
       await this.levelManager.saveData();
       await this.stop(false); // Don't log out, just disconnect
       process.exit(0);

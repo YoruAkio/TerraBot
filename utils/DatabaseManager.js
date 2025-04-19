@@ -136,7 +136,7 @@ class Database extends EventEmitter {
       // Convert Map to object for JSON serialization
       const dataObj = Object.fromEntries(this.data);
       
-      await fs.writeJson(this.filePath, dataObj, { spaces: 2 });
+      await fs.writeFileSync(this.filePath, JSON.stringify(dataObj, null, 2));
       this.emit('saved');
       this.logger.debug(`Saved ${this.data.size} records to ${this.name}`);
       return true;

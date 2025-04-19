@@ -70,19 +70,6 @@ const bot = new Terra(config);
   }
 })();
 
-// Handle graceful shutdown
-process.on('SIGINT', async () => {
-  console.log('\nShutting down TerraBot...');
-  await bot.stop(false);
-  process.exit(0);
-});
-
-process.on('SIGTERM', async () => {
-  console.log('\nShutting down TerraBot...');
-  await bot.stop(false);
-  process.exit(0);
-});
-
 // Handle uncaught exceptions
 process.on('uncaughtException', (error) => {
   console.error('❌ Uncaught exception:', error);
