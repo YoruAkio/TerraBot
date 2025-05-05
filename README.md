@@ -30,7 +30,7 @@ A powerful WhatsApp bot with rich media capabilities, built with [Baileys](https
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/TerraBot.git
+git clone https://github.com/yoruakio/TerraBot.git
 cd TerraBot
 ```
 
